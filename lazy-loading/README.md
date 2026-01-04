@@ -1,0 +1,1 @@
+>component m  jo page hai or app.jsx m vo hai lazy loading  or second app.jsx m uper coment hai usko uncomment kkre sare page link without compnonts  to ek or lazy laoding hogi 
