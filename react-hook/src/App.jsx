@@ -1,30 +1,59 @@
-import React from 'react'
+
 import { useState } from 'react'
 
 const App = () => {
-  const [num, setNum] = useState(0)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
 
-  function increaseNum() {
-    setNum(pre=> pre + 1)
+  const [submit, setsubmit] = useState(false)
+
+  function handleSubmite(e){
+    e.preventDefault();
+
+    if(name === "" || email === ""){
+      alert("Please fill in all fields");
+      setsubmit(false);
+    }
+
+            setName('');
+            setEmail('');
+            setsubmit (true);
+            
+
   }
 
-  function decreaseNum() {
-    setNum(pre=> pre - 1)
+  function handleReset(){
+    setName("");
+    setEmail("");
+    setsubmit (false);
   }
-
-  function resetNum() {
-    setNum(0)
-  } 
 
   return (
-    <div>
-     
-      <div className='w-20 h-10 bg-gray-800 ml-40 flex  justify-center items-center text-2xl mb-10 mt-20'>{num}</div>
-      <button onClick={increaseNum } className='w-20 h-10 bg-black text-white ml-10'>increase</button>
-      <button onClick={decreaseNum} className='w-20 h-10 bg-black text-white ml-10'>decrease</button>
-      <button onClick={resetNum} className='w-20 h-10 bg-black text-white ml-10'>reset</button>
+    <div className='bg-blue-100 min-h-screen '>
+        <h1>Contact Page</h1>
+
+        <form className='flex justify-center items-center flex-col' onSubmit={handleSubmite}>
+            <input type="text" placeholder='Name'  className='border-2 m-2 p-2' value={name} onChange= {(e)=> setName(e.target.value)}/>
+            <br/>
+            <input type="email" placeholder='Email' className='border-2 m-2 p-2' value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <br/>
+            <button type="submit" className='bg-blue-500 text-white p-2 m-2 rounded'>Submit</button>
+            <button type="reset" className='bg-red-500 text-white p-2 m-2 rounded' onClick={handleReset}>Reset</button>
+        </form>
+        {submit &&(
+          <div className='bg-green-200 p-4 m-4 rounded'>
+            <h2 className='text-green-800 font-bold text-lg'>Form Submitted Successfully!</h2>
+          
+            <h2 className='text-green-800 font-bold text-lg'>Submitted Data:</h2>
+            <p><span className='font-bold'>Name:</span> {name}</p>
+            <p><span className='font-bold'>Email:</span> {email}</p>
+            </div>
+
+        )}
+
+       
     </div>
   )
 }
 
-export default App
+export default App;
